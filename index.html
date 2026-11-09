@@ -3349,7 +3349,7 @@ E("u6-solve-context-problem", 6, ["8.7"], 2, "gen", function () {
 }, ["Write an equation first: one-time fee plus per-unit charge times the unknown, equal to the total.", "Subtract the fee from the total, then divide what is left by the per-unit charge."]);
 
 // 7. L2, 8.6: identify an error in a worked solution.
-E("u6-identify-error", 6, ["8.6"], 1, "gen", function () {
+E("u6-identify-error", 6, ["8.6"], 2, "gen", function () {
   var type = pick(["add-instead", "divide-one-term", "distribute-part"]);
   if (type === "add-instead") {
     var a = ri(2, 8), b = a * ri(1, 2), x = ri(2, 11), c = a * x + b;
@@ -3441,16 +3441,18 @@ E("u6-solve-div-plus", 6, ["8.4"], 2, "gen", function () {
     { mode: "solve-div-plus", a: a, b: b, d: d });
 }, ["Work in reverse order: deal with the added number before the division.", "Subtract the constant from both sides, then multiply both sides by the divisor."]);
 
-// 11. L2, 7.3, CR 2: missing value in an ordered pair.
-E("u6-missing-ordered-pair", 6, ["7.3"], 2, "gen", function () {
+// 11. L1, 7.3: missing y value in an ordered pair (forward mode; split under ruling 18, Nov 9, 2026).
+E("u6-missing-ordered-pair", 6, ["7.3"], 1, "gen", function () {
   var m = ri(2, 7), b = ri(-4, 9);
-  var dir = pick(["findy", "findx"]);
-  if (dir === "findy") {
-    var x = ri(1, 9), y = m * x + b;
-    var sol = "Substitute \\(x = " + x + "\\) into the equation: \\[ \\begin{aligned} y &= " + fmt(m) + "(" + x + ")" + u6sgn(b) + " \\\\ &= " + fmt(m * x) + u6sgn(b) + " \\\\ &= " + fmt(y) + " \\end{aligned} \\] So the missing value in the pair \\((" + x + ", \\ ?)\\) is <b>" + fmt(y) + "</b>.";
-    return numq("The ordered pair \\((" + x + ", \\ ?)\\) lies on the relation \\(y = " + fmt(m) + "x" + u6sgn(b) + "\\). What is the missing y value?", y, 0.01, sol,
-      { mode: "missing-pair-y", m: m, b: b, x: x });
-  }
+  var x = ri(1, 9), y = m * x + b;
+  var sol = "Substitute \\(x = " + x + "\\) into the equation: \\[ \\begin{aligned} y &= " + fmt(m) + "(" + x + ")" + u6sgn(b) + " \\\\ &= " + fmt(m * x) + u6sgn(b) + " \\\\ &= " + fmt(y) + " \\end{aligned} \\] So the missing value in the pair \\((" + x + ", \\ ?)\\) is <b>" + fmt(y) + "</b>.";
+  return numq("The ordered pair \\((" + x + ", \\ ?)\\) lies on the relation \\(y = " + fmt(m) + "x" + u6sgn(b) + "\\). What is the missing y value?", y, 0.01, sol,
+    { mode: "missing-pair-y", m: m, b: b, x: x });
+}, ["An ordered pair on a relation must satisfy its equation when the known value is substituted.", "Substitute the known coordinate, then solve the small equation that remains."]);
+
+// 11b. L2, 7.3, CR 2: missing x value in an ordered pair (backward mode; split from u6-missing-ordered-pair under ruling 18, Nov 9, 2026).
+E("u6-missing-ordered-pair-backward", 6, ["7.3"], 2, "gen", function () {
+  var m = ri(2, 7), b = ri(-4, 9);
   var xt = ri(2, 10), yt = m * xt + b;
   var sol2 = "Substitute \\(y = " + yt + "\\) and solve for \\(x\\): \\[ \\begin{aligned} " + fmt(yt) + " &= " + fmt(m) + "x" + u6sgn(b) + " \\\\ " + fmt(yt) + (b >= 0 ? " - " + fmt(b) : " + " + fmt(-b)) + " &= " + fmt(m) + "x \\\\ " + fmt(yt - b) + " &= " + fmt(m) + "x \\\\ x &= " + fmt(xt) + " \\end{aligned} \\] So the missing value in the pair \\((?, " + fmt(yt) + ")\\) is <b>" + fmt(xt) + "</b>.";
   return numq("The ordered pair \\((?, " + fmt(yt) + ")\\) lies on the relation \\(y = " + fmt(m) + "x" + u6sgn(b) + "\\). What is the missing x value?", xt, 0.01, sol2,
@@ -3858,7 +3860,7 @@ E("u7-name-the-trick", 7, ["11.5"], 1, "var", varset([
   }
 ]), ["Name the built-in feature doing the damage: axis start, axis spacing, depth effects, symbol size, or missing data.", "Describe the feature in plain words; a short name for the feature is enough."]);
 
-E("u7-false-conclusion", 7, ["11.6"], 1, "var", varset([
+E("u7-false-conclusion", 7, ["11.6"], 2, "var", varset([
   function(){
     return mcq("Library loans were: Monday 120, Tuesday 135, Wednesday 128, Thursday 150, Friday 142. Which conclusion goes against this data?",
       {t:"Loans rose every single day of the week", fb:"Right: loans fell from Tuesday 135 to Wednesday 128, so they did not rise every day."},
@@ -3933,7 +3935,7 @@ E("u7-fix-the-graph", 7, ["11.4"], 1, "var", varset([
   }
 ]), ["Think of the one repair that removes the distortion you can see in the description.", "State the repair as a short action phrase, such as what the axis or the data range should become."]);
 
-E("u7-context-for-probability", 7, ["12.2"], 1, "var", varset([
+E("u7-context-for-probability", 7, ["12.2"], 2, "var", varset([
   function(){
     return mcq("Which context gives a probability of \\(\\frac{1}{12}\\)?",
       {t:"Toss a coin and roll a die; getting heads and a 6", fb:"Right: \\(\\frac{1}{2} \\times \\frac{1}{6} = \\frac{1}{12}\\), so this context matches the value."},
@@ -5328,6 +5330,7 @@ var CR_MARKS={
  "u5-ratio-problem-solve": 2,
  "u6-graph-extend-pair": 2,
  "u6-missing-ordered-pair": 2,
+ "u6-missing-ordered-pair-backward": 2,
  "u6-solve-context-problem": 3,
  "u6-solve-distributive": 3,
  "u6-solve-div-plus": 2,
