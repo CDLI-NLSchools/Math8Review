@@ -1166,7 +1166,7 @@ E("u2-mult-context-match", 2, ["6.19"], 1, "gen", function () {
 }, ["A product with a negative factor means a negative change repeated several times.", "Check each situation: is the change negative, and is it repeated or split up?"]);
 
 // 6. L2, 6.20, CR 3: solve a multiplication problem in context (start plus repeated change).
-E("u2-mult-problem", 2, ["6.20"], 2, "gen", function () {
+E("u2-mult-problem", 2, ["6.20"], 1, "gen", function () {
   var mode = ri(0, 2);
   if (mode === 0) {
     var start = ri(-6, 8), r = ri(2, 6), h = ri(3, 7);
@@ -1360,7 +1360,7 @@ E("u2-ooo-num", 2, ["6.27"], 2, "gen", function () {
 }, ["Multiplication and division are done before addition and subtraction.", "Work out the product and the quotient separately, then combine them."]);
 
 // 13. L2, 6.18 and 6.20, CR 2: signed per-round change applied in a game problem.
-E("u2-sign-product-problem", 2, ["6.18", "6.20"], 2, "gen", function () {
+E("u2-sign-product-problem", 2, ["6.18", "6.20"], 1, "gen", function () {
   var start = ri(20, 90);
   var per = 0;
   while (per === 0 || Math.abs(per) < 2) per = ri(-9, 9);
@@ -1494,7 +1494,7 @@ E("u3-model-frac-times-whole", 3, ["6.4"], 1, "gen", function () {
 }, ["Multiplication by a whole number means adding the fraction the same number of times.", "First write the total as a repeated addition of the fraction."]);
 
 // 2. L1, 6.7: estimate a product against benchmarks 0, 1/2, 1.
-E("u3-estimate-product-benchmark", 3, ["6.7"], 1, "gen", function () {
+E("u3-estimate-product-benchmark", 3, ["6.7"], 2, "gen", function () {
   var P = null;
   for (var t = 0; t < 300 && !P; t++) {
     var d1 = ri(3, 10), n1 = ri(1, d1 - 1), d2 = ri(3, 10), n2 = ri(1, d2 - 1);
@@ -1626,7 +1626,7 @@ E("u3-multiply-mixed-cr", 3, ["6.8"], 2, "gen", function () {
 }, ["Change the mixed number to an improper fraction before multiplying.", "First rewrite the trail length as a single fraction."]);
 
 // 8. L2, 6.11: estimate a quotient against whole number benchmarks.
-E("u3-estimate-quotient-benchmark", 3, ["6.11"], 1, "gen", function () {
+E("u3-estimate-quotient-benchmark", 3, ["6.11"], 2, "gen", function () {
   var cats = ["Less than 1", "About 1", "About 2", "More than 2"];
   var P = null;
   for (var t = 0; t < 400 && !P; t++) {
